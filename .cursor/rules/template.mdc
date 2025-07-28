@@ -1,10 +1,6 @@
 ---
-description:
-globs:
-alwaysApply: true
+alwaysApply: false
 ---
-
-
 # 🎓 Educational Interactive Template - Cursor Rules
 
 ## 🚨 PRIMARY RULE: Interns Must Only Edit Within Green Boundaries

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Template from './template/Template.jsx';
 import Flexi from './template/assets/Flexi.js';
+import Distributive from './Math-Interactives/distributive/main.tsx';
 
 function App() {
   const [current_step, set_current_step] = useState(1);
@@ -14,7 +15,7 @@ function App() {
   // ==========================================
   
   const total_steps = 5; // Change me, How many Steps do you want?
-  const project_title = "Distribtive Proeprty"; // MODIFY THIS FOR YOUR PROJECT
+  const project_title = "Distributive Property"; // MODIFY THIS FOR YOUR PROJECT
   
   const flexi_steps = [
     { pose: Flexi.excited, message: "Welcome to the Template" },
@@ -45,6 +46,7 @@ function App() {
       {/* ================================================= */}
       {/* 🟢 HEY CURSUR! VIBE CODE INSIDE THIS AREA BELOW! */}
       {/* ================================================= */}
+      <Distributive current_step={current_step}></Distributive>
       
       {/* Your interactive content goes here! */}
       

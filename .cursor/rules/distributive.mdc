@@ -1,0 +1,41 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# Distributive Property Interactive
+
+## Overview
+This interactive will show students how the distributive property works in a very visual and animated way.
+
+## How it Works
+
+### Step 1: Display Expression
+- A random expression that follows the format `a(b + c)` is shown
+- `a`, `b`, and `c` should only be integers
+- If `c` is negative, use `-` instead of `+` in the expression
+
+### Step 2: Visual Distribution
+- The same expression is shown with arrows to distribute `a` across `b` and `c`
+- Student can drag `a` across these arrows (once each)
+- **Dragging behavior:**
+  - As `a` is being dragged, it shows up as `a×`
+  - Once dragged to destination, expression updates to `a×b` and `a×c` respectively
+- **Animation:**
+  - After both `a`s are completed, numbers animate to perform multiplications
+  - Simplify any sign issues (no minusing a negative)
+
+### Step 3: Final Result
+- Once multiplication is complete, highlight the newly distributed expression in green
+- Show the original expression above with an equals sign
+- **No need to perform the addition step**
+
+## Technical Requirements
+- Random integer generation for `a`, `b`, `c`
+- Drag and drop functionality
+- Smooth animations for multiplication
+- Sign handling for negative numbers
+- Color highlighting for final result
+
+## Example Flow
