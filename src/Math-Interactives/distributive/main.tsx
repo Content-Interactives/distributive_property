@@ -21,9 +21,17 @@ const Distributive: React.FC<Props> = ({current_step}) => {
             return (
                 <div className="p-8 text-center">
                     <h2 className="text-2xl mb-4">Solve this expression:</h2>
-                    <div className="text-4xl font-bold">
-                        {a}({b} + {c})
+                    <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2">
+                        <span className="bg-yellow-200 px-2 py-1 rounded">{a}</span>
+                        <span>(</span>
+                        <span className="bg-blue-200 px-2 py-1 rounded">{b}</span>
+                        <span>+</span>
+                        <span className="bg-green-200 px-2 py-1 rounded">{c}</span>
+                        <span>)</span>
                     </div>
+                    <p className="text-lg text-gray-600">
+                        We'll distribute the <span className="bg-yellow-200 px-1 rounded">{a}</span> to both terms inside the parentheses.
+                    </p>
                 </div>
             );
         case 2:
