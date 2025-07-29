@@ -103,11 +103,29 @@ const Distributive: React.FC<Props> = ({current_step}) => {
         </div>
     );
 
+    // Add step 4 render function
+    const render_step_4 = () => (
+        <div className="p-8 text-center">
+            <div className="mb-8">
+                <h2 className="text-2xl mb-4">Great job! 🎉</h2>
+                <p className="text-lg mb-6">You solved: {a}({b} + {c}) = {a * b + a * c}</p>
+            </div>
+            
+            <button 
+                onClick={() => window.location.reload()}
+                className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg text-xl font-bold"
+            >
+                Try Another Problem! 🚀
+            </button>
+        </div>
+    );
+
     // Clean switch
     switch(current_step) {
         case 1: return render_step_1();
         case 2: return render_step_2();
         case 3: return render_step_3();
+        case 4: return render_step_4();
         default: return <div>Invalid step</div>;
     }
 }
