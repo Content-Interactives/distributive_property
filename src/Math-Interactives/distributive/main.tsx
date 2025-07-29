@@ -1,46 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { cn } from '../../utils/cn'; // From src/Math-Interactives/distributive/ to src/utils/
+import { generateRandomExpression, getStyles, getDistances } from './utils';
 
 interface Props {
     current_step: number;
 }
 
+// ✅ Static styles outside
+const { yellow, blue, green, title, arrow } = getStyles();
+
 const Distributive: React.FC<Props> = ({current_step}) => {
-    const generate_random_expression = () => {
-        const a = Math.floor(Math.random() * 9) + 1;
-        const b = Math.floor(Math.random() * 9) + 1;
-        const c = Math.floor(Math.random() * 9) + 1;
-        return { a, b, c };
-    };
+    // ✅ Hooks must stay inside
+    const [expression] = useState(generateRandomExpression);
+    const { a, b, c } = expression;
 
-    const [expression] = useState(generate_random_expression);
-    const { a, b, c } = expression; // Declare ONCE
 
-    // Add refs for leader-line (no visual change yet)
-    const yellowRef = useRef<HTMLSpanElement>(null);
-    const blueRef = useRef<HTMLSpanElement>(null);
-    const greenRef = useRef<HTMLSpanElement>(null);
-
-    // Much better naming
-    const base = cn(
-        "px-3 py-2 rounded",
-        "text-2xl sm:text-4xl font-bold", 
-        "cursor-pointer select-none touch-manipulation"
-    );
-
-    const yellow = cn(base, "bg-yellow-200 hover:bg-yellow-300 active:bg-yellow-400");
-    const blue = cn(base, "bg-blue-200 hover:bg-blue-300 active:bg-blue-400");
-    const green = cn(base, "bg-green-200 hover:bg-green-300 active:bg-green-400");
-
-    // Add these new ones
-    const title = cn("text-2xl mb-4");
-
-    const arrow = {
-        stroke: "#F59E0B",
-        strokeWidth: "3",
-        fill: "none",
-        markerEnd: "url(#arrow)"
-    };
 
     // Step rendering functions
     const render_step_1 = () => (
