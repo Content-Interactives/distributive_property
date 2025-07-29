@@ -15,6 +15,7 @@ export const DraggableNumber = ({
             drag
             dragMomentum={false}
             dragElastic={0.1}
+            dragSnapToOrigin={true}
             whileDrag={{ scale: 1.1 }}
             className={className}
             style={{ 
