@@ -99,10 +99,29 @@ const Distributive: React.FC<Props> = ({current_step}) => {
         </div>
     );
 
+    const render_step_3 = () => (
+        <div className="p-8 text-center">
+            <div className="title-box mb-20 p-4 bg-gray-100 rounded">
+                <h2 className={title}>Final Result:</h2>
+            </div>
+            
+            <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2">
+                <span className={yellow}>{a}</span>
+                <span>×</span>
+                <span className={blue}>{b}</span>
+                <span className="mx-2">+</span>
+                <span className={yellow}>{a}</span>
+                <span>×</span>
+                <span className={green}>{c}</span>
+            </div>
+        </div>
+    );
+
     // Clean switch
     switch(current_step) {
         case 1: return render_step_1();
         case 2: return render_step_2();
+        case 3: return render_step_3();
         default: return <div>Invalid step</div>;
     }
 }
