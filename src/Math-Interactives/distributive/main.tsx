@@ -38,7 +38,7 @@ const Distributive: React.FC<Props> = ({current_step}) => {
     // Step rendering functions
     const render_step_1 = () => (
         <div className="p-8 text-center">
-            <h2 className="text-2xl mb-4">Solve this expression:</h2>
+
             <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2">
                 <span ref={yellowRef} className={yellow}>{a}</span>
                 <span>(</span>
@@ -52,9 +52,6 @@ const Distributive: React.FC<Props> = ({current_step}) => {
 
     const render_step_2 = () => (
         <div className="p-8 text-center">
-            <div className="title-box mb-20 p-4 bg-gray-100 rounded">
-                <h2 className={title}>Distribute the {a}:</h2>
-            </div>
             
             <div className="relative">
                 {/* Your existing arrows */}
@@ -101,9 +98,7 @@ const Distributive: React.FC<Props> = ({current_step}) => {
 
     const render_step_3 = () => (
         <div className="p-8 text-center">
-            <div className="title-box mb-20 p-4 bg-gray-100 rounded">
-                <h2 className={title}>Final Result:</h2>
-            </div>
+
             
             <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2">
                 <span className={yellow}>{a}</span>
