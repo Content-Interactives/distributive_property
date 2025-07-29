@@ -1,7 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-export const DraggableNumber = ({ number, className }: { number: number, className: string }) => {
+export const DraggableNumber = ({ 
+    number, 
+    className, 
+    onDragEnd 
+}: { 
+    number: number, 
+    className: string,
+    onDragEnd?: (event: any, info: any) => void
+}) => {
     return (
         <motion.span
             drag
@@ -17,6 +25,7 @@ export const DraggableNumber = ({ number, className }: { number: number, classNa
                 position: 'relative',
                 zIndex: 10
             }}
+            onDragEnd={onDragEnd}
         >
             {number}
         </motion.span>

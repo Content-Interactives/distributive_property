@@ -22,6 +22,19 @@ const Distributive: React.FC<Props> = ({current_step}) => {
     const [leftBlankFilled, setLeftBlankFilled] = useState(false);
     const [rightBlankFilled, setRightBlankFilled] = useState(false);
 
+    const handleDragEnd = (event: any, info: any) => {
+        const leftBox = document.getElementById('left-blank')?.getBoundingClientRect();
+        const rightBox = document.getElementById('right-blank')?.getBoundingClientRect();
+        
+        const snapDistance = 100;
+        
+        if (leftBox && Math.abs(info.point.x - leftBox.x) < snapDistance) {
+            setLeftBlankFilled(true);
+        } else if (rightBox && Math.abs(info.point.x - rightBox.x) < snapDistance) {
+            setRightBlankFilled(true);
+        }
+    };
+
     // Step rendering functions
     const render_step_1 = () => (
         <div className="p-8 text-center">
@@ -47,8 +60,8 @@ const Distributive: React.FC<Props> = ({current_step}) => {
                 {/* Your existing arrows */}
                 <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-96">
                     <svg className="w-full h-full">
-                        <path d="M 20 67 Q 40 20 90 67" {...arrow} />
-                        <path d="M 20 67 Q 90 -40 260 67" {...arrow} />
+                        {!leftBlankFilled && <path d="M 20 67 Q 40 20 90 67" {...arrow} />}
+                        {!rightBlankFilled && <path d="M 20 67 Q 90 -40 260 67" {...arrow} />}
                         
                         <defs>
                             <marker id="arrow" markerWidth="8" markerHeight="6" 
@@ -61,19 +74,19 @@ const Distributive: React.FC<Props> = ({current_step}) => {
                 
                 {/* Distributed equation with draggable yellow */}
                 <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2">
-                    <DraggableNumber number={a} className={yellow} />
+                    <DraggableNumber number={a} className={yellow} onDragEnd={handleDragEnd} />
                     <span>(</span>
                     
-                    <div className="px-3 py-2 rounded border-2 border-dashed border-yellow-400 bg-yellow-100 text-2xl sm:text-4xl font-bold text-gray-400 cursor-pointer select-none">
-                        ?
+                    <div id="left-blank" className="px-3 py-2 rounded border-2 border-dashed border-yellow-400 bg-yellow-100 text-2xl sm:text-4xl font-bold text-gray-400 cursor-pointer select-none">
+                        {leftBlankFilled ? a : '?'}
                     </div>
                     <span>×</span>
                     <span className={blue}>{b}</span>
                     
                     <span className="mx-2">+</span>
                     
-                    <div className="px-3 py-2 rounded border-2 border-dashed border-yellow-400 bg-yellow-100 text-2xl sm:text-4xl font-bold text-gray-400 cursor-pointer select-none">
-                        ?
+                    <div id="right-blank" className="px-3 py-2 rounded border-2 border-dashed border-yellow-400 bg-yellow-100 text-2xl sm:text-4xl font-bold text-gray-400 cursor-pointer select-none">
+                        {rightBlankFilled ? a : '?'}
                     </div>
                     <span>×</span>
                     <span className={green}>{c}</span>
