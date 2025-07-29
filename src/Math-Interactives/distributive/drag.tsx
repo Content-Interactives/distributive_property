@@ -12,7 +12,10 @@ export const DraggableNumber = ({ number, className }: { number: number, classNa
             style={{ 
                 touchAction: 'none',
                 userSelect: 'none',
-                WebkitUserSelect: 'none'
+                WebkitUserSelect: 'none',
+                cursor: 'grab',
+                position: 'relative',
+                zIndex: 10
             }}
         >
             {number}
