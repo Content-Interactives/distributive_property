@@ -12,6 +12,8 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/utilities": "^3.2.2",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.11",
     "leader-line": "^1.0.8",

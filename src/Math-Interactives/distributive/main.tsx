@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { generateRandomExpression, getStyles, getDistances } from './utils';
+import React, { useState, useRef } from 'react';
+import { generateRandomExpression, getStyles } from './utils';
+import { DraggableNumber } from './drag';
 
 interface Props {
     current_step: number;
@@ -16,6 +17,10 @@ const Distributive: React.FC<Props> = ({current_step}) => {
     const yellowRef = useRef<HTMLSpanElement>(null);
     const blueRef = useRef<HTMLSpanElement>(null);
     const greenRef = useRef<HTMLSpanElement>(null);
+
+    // ✅ Drag functionality
+    const [leftBlankFilled, setLeftBlankFilled] = useState(false);
+    const [rightBlankFilled, setRightBlankFilled] = useState(false);
 
     // Step rendering functions
     const render_step_1 = () => (
@@ -39,7 +44,7 @@ const Distributive: React.FC<Props> = ({current_step}) => {
             </div>
             
             <div className="relative">
-                {/* Your existing arrows - don't touch */}
+                {/* Your existing arrows */}
                 <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-96">
                     <svg className="w-full h-full">
                         <path d="M 20 67 Q 40 20 90 67" {...arrow} />
@@ -54,9 +59,9 @@ const Distributive: React.FC<Props> = ({current_step}) => {
                     </svg>
                 </div>
                 
-                {/* Distributed equation with parentheses */}
+                {/* Distributed equation with draggable yellow */}
                 <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2">
-                    <span ref={yellowRef} className={yellow}>{a}</span>
+                    <DraggableNumber number={a} className={yellow} />
                     <span>(</span>
                     
                     <div className="px-3 py-2 rounded border-2 border-dashed border-yellow-400 bg-yellow-100 text-2xl sm:text-4xl font-bold text-gray-400 cursor-pointer select-none">

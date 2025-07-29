@@ -17,9 +17,9 @@ export const getStyles = () => {
         "cursor-pointer select-none touch-manipulation"
     );
 
-    const yellow = cn(base, "bg-yellow-200 hover:bg-yellow-300 active:bg-yellow-400");
-    const blue = cn(base, "bg-blue-200 hover:bg-blue-300 active:bg-blue-400");
-    const green = cn(base, "bg-green-200 hover:bg-green-300 active:bg-green-400");
+    const yellow = cn(base, "bg-yellow-200 hover:bg-yellow-300");
+    const blue = cn(base, "bg-blue-200 hover:bg-blue-300");
+    const green = cn(base, "bg-green-200 hover:bg-green-300");
     const title = cn("text-2xl mb-4");
 
     const arrow = {
