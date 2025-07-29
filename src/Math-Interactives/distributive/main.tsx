@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { cn } from '../../utils/cn'; // From src/Math-Interactives/distributive/ to src/utils/
 
 interface Props {
     current_step: number;
@@ -20,16 +21,27 @@ const Distributive: React.FC<Props> = ({current_step}) => {
     const blueRef = useRef<HTMLSpanElement>(null);
     const greenRef = useRef<HTMLSpanElement>(null);
 
+    // Much better naming
+    const base = cn(
+        "px-3 py-2 rounded",
+        "text-2xl sm:text-4xl font-bold", 
+        "cursor-pointer select-none touch-manipulation"
+    );
+
+    const yellow = cn(base, "bg-yellow-200 hover:bg-yellow-300 active:bg-yellow-400");
+    const blue = cn(base, "bg-blue-200 hover:bg-blue-300 active:bg-blue-400");
+    const green = cn(base, "bg-green-200 hover:bg-green-300 active:bg-green-400");
+
     // Step rendering functions
     const render_step_1 = () => (
         <div className="p-8 text-center">
             <h2 className="text-2xl mb-4">Solve this expression:</h2>
             <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2">
-                <span className="bg-yellow-200 px-2 py-1 rounded">{a}</span>
+                <span className={yellow}>{a}</span>
                 <span>(</span>
-                <span className="bg-blue-200 px-2 py-1 rounded">{b}</span>
+                <span className={blue}>{b}</span>
                 <span>+</span>
-                <span className="bg-green-200 px-2 py-1 rounded">{c}</span>
+                <span className={green}>{c}</span>
                 <span>)</span>
             </div>
         </div>
@@ -69,11 +81,11 @@ const Distributive: React.FC<Props> = ({current_step}) => {
                 </div>
                 
                 <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2">
-                    <span className="bg-yellow-200 px-2 py-1 rounded">{a}</span>
+                    <span className={yellow}>{a}</span>
                     <span>(</span>
-                    <span className="bg-blue-200 px-2 py-1 rounded">{b}</span>
+                    <span className={blue}>{b}</span>
                     <span>+</span>
-                    <span className="bg-green-200 px-2 py-1 rounded">{c}</span>
+                    <span className={green}>{c}</span>
                     <span>)</span>
                 </div>
             </div>
