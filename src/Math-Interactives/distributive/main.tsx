@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { generateRandomExpression, getStyles } from './utils';
 import { DraggableNumber } from './drag';
+import { SimplifyAnimation } from './simplify';
 
 interface Props {
     current_step: number;
@@ -98,17 +99,7 @@ const Distributive: React.FC<Props> = ({current_step}) => {
 
     const render_step_3 = () => (
         <div className="p-8 text-center">
-
-            
-            <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2">
-                <span className={yellow}>{a}</span>
-                <span>×</span>
-                <span className={blue}>{b}</span>
-                <span className="mx-2">+</span>
-                <span className={yellow}>{a}</span>
-                <span>×</span>
-                <span className={green}>{c}</span>
-            </div>
+            <SimplifyAnimation a={a} b={b} c={c} />
         </div>
     );
 

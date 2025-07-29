@@ -17,6 +17,7 @@
     "leader-line": "^1.0.8",
     "react": "^19.1.0",
     "react-arrow": "^2.2.1",
+    "react-countup": "^6.5.3",
     "react-dom": "^19.1.0",
     "react-xarrows": "^2.0.2",
     "tailwind-merge": "^3.3.1"
