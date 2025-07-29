@@ -77,16 +77,22 @@ const Distributive: React.FC<Props> = ({current_step}) => {
                 )}
                     <span>(</span>
                     
-                    <div id="left-blank" className="px-3 py-2 rounded border-2 border-dashed border-yellow-400 bg-yellow-100 text-2xl sm:text-4xl font-bold text-gray-400 cursor-pointer select-none">
-                        {leftBlankFilled ? a : '?'}
+                    <div id="left-blank" className="relative cursor-pointer">
+                        <div className="px-3 py-2 rounded border-2 border-dashed border-yellow-400 bg-yellow-100 text-2xl font-bold text-gray-400 select-none">
+                            {leftBlankFilled ? a : '?'}
+                        </div>
+                        <div className="absolute inset-0 w-24 h-24 -translate-x-6 -translate-y-6"></div>
                     </div>
                     <span>×</span>
                     <span className={blue}>{b}</span>
                     
                     <span className="mx-2">+</span>
                     
-                    <div id="right-blank" className="px-3 py-2 rounded border-2 border-dashed border-yellow-400 bg-yellow-100 text-2xl sm:text-4xl font-bold text-gray-400 cursor-pointer select-none">
-                        {rightBlankFilled ? a : '?'}
+                    <div id="right-blank" className="relative cursor-pointer">
+                        <div className="px-3 py-2 rounded border-2 border-dashed border-yellow-400 bg-yellow-100 text-2xl font-bold text-gray-400 select-none">
+                            {rightBlankFilled ? a : '?'}
+                        </div>
+                        <div className="absolute inset-0 w-24 h-24 -translate-x-6 -translate-y-6"></div>
                     </div>
                     <span>×</span>
                     <span className={green}>{c}</span>
