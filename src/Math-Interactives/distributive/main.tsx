@@ -9,22 +9,24 @@ interface Props {
 const { yellow, blue, green, title, arrow } = getStyles();
 
 const Distributive: React.FC<Props> = ({current_step}) => {
-    // ✅ Hooks must stay inside
     const [expression] = useState(generateRandomExpression);
     const { a, b, c } = expression;
 
-
+    // Add refs here in main.tsx
+    const yellowRef = useRef<HTMLSpanElement>(null);
+    const blueRef = useRef<HTMLSpanElement>(null);
+    const greenRef = useRef<HTMLSpanElement>(null);
 
     // Step rendering functions
     const render_step_1 = () => (
         <div className="p-8 text-center">
             <h2 className="text-2xl mb-4">Solve this expression:</h2>
             <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2">
-                <span className={yellow}>{a}</span>
+                <span ref={yellowRef} className={yellow}>{a}</span>
                 <span>(</span>
-                <span className={blue}>{b}</span>
+                <span ref={blueRef} className={blue}>{b}</span>
                 <span>+</span>
-                <span className={green}>{c}</span>
+                <span ref={greenRef} className={green}>{c}</span>
                 <span>)</span>
             </div>
         </div>
@@ -36,14 +38,11 @@ const Distributive: React.FC<Props> = ({current_step}) => {
                 <h2 className={title}>Distribute the {a}:</h2>
             </div>
             
-            {/* Simple container with curves on top */}
             <div className="relative">
-                {/* Static curved arrows - just decorative */}
-                <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-64 h-12">
+                {/* Your existing arrows - don't touch */}
+                <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-80 h-12">
                     <svg className="w-full h-full">
-                        {/* Left curve */}
-                        <path d="M 45 45 Q 50 0 100 40" {...arrow} />
-                        {/* Right curve */}
+                        <path d="M 45 45 Q 50 0 100 45" {...arrow} />
                         <path d="M 45 45 Q 80 -30 180 45" {...arrow} />
                         
                         <defs>
@@ -55,12 +54,25 @@ const Distributive: React.FC<Props> = ({current_step}) => {
                     </svg>
                 </div>
                 
+                {/* Distributed equation with parentheses */}
                 <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2">
-                    <span className={yellow}>{a}</span>
+                    <span ref={yellowRef} className={yellow}>{a}</span>
                     <span>(</span>
+                    
+                    <div className="px-3 py-2 rounded border-2 border-dashed border-yellow-400 bg-yellow-100 text-2xl sm:text-4xl font-bold text-gray-400 cursor-pointer select-none">
+                        ?
+                    </div>
+                    <span>×</span>
                     <span className={blue}>{b}</span>
-                    <span>+</span>
+                    
+                    <span className="mx-2">+</span>
+                    
+                    <div className="px-3 py-2 rounded border-2 border-dashed border-yellow-400 bg-yellow-100 text-2xl sm:text-4xl font-bold text-gray-400 cursor-pointer select-none">
+                        ?
+                    </div>
+                    <span>×</span>
                     <span className={green}>{c}</span>
+                    
                     <span>)</span>
                 </div>
             </div>
