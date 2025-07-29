@@ -12,6 +12,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "leader-line": "^1.0.8",
     "react": "^19.1.0",
     "react-arrow": "^2.2.1",
     "react-dom": "^19.1.0",
