@@ -32,6 +32,16 @@ const Distributive: React.FC<Props> = ({current_step}) => {
     const blue = cn(base, "bg-blue-200 hover:bg-blue-300 active:bg-blue-400");
     const green = cn(base, "bg-green-200 hover:bg-green-300 active:bg-green-400");
 
+    // Add these new ones
+    const title = cn("text-2xl mb-4");
+
+    const arrow = {
+        stroke: "#F59E0B",
+        strokeWidth: "3",
+        fill: "none",
+        markerEnd: "url(#arrow)"
+    };
+
     // Step rendering functions
     const render_step_1 = () => (
         <div className="p-8 text-center">
@@ -50,7 +60,7 @@ const Distributive: React.FC<Props> = ({current_step}) => {
     const render_step_2 = () => (
         <div className="p-8 text-center">
             <div className="title-box mb-12 p-4 bg-gray-100 rounded">
-                <h2 className="text-2xl">Distribute the {a}:</h2>
+                <h2 className={title}>Distribute the {a}:</h2>
             </div>
             
             {/* Simple container with curves on top */}
@@ -59,17 +69,9 @@ const Distributive: React.FC<Props> = ({current_step}) => {
                 <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-64 h-12">
                     <svg className="w-full h-full">
                         {/* Left curve */}
-                        <path d="M 45 45 Q 50 0 100 40" 
-                              stroke="#F59E0B" 
-                              strokeWidth="3" 
-                              fill="none" 
-                              markerEnd="url(#arrow)" />
+                        <path d="M 45 45 Q 50 0 100 40" {...arrow} />
                         {/* Right curve */}
-                        <path d="M 45 45 Q 80 -30 180 45" 
-                              stroke="#F59E0B"
-                              strokeWidth="3" 
-                              fill="none" 
-                              markerEnd="url(#arrow)" />
+                        <path d="M 45 45 Q 80 -30 180 45" {...arrow} />
                         
                         <defs>
                             <marker id="arrow" markerWidth="8" markerHeight="6" 
