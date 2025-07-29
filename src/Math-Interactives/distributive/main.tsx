@@ -34,16 +34,16 @@ const Distributive: React.FC<Props> = ({current_step}) => {
 
     const render_step_2 = () => (
         <div className="p-8 text-center">
-            <div className="title-box mb-12 p-4 bg-gray-100 rounded">
+            <div className="title-box mb-20 p-4 bg-gray-100 rounded">
                 <h2 className={title}>Distribute the {a}:</h2>
             </div>
             
             <div className="relative">
                 {/* Your existing arrows - don't touch */}
-                <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-80 h-12">
+                <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-96">
                     <svg className="w-full h-full">
-                        <path d="M 45 45 Q 50 0 100 45" {...arrow} />
-                        <path d="M 45 45 Q 80 -30 180 45" {...arrow} />
+                        <path d="M 20 67 Q 40 20 90 67" {...arrow} />
+                        <path d="M 20 67 Q 90 -40 260 67" {...arrow} />
                         
                         <defs>
                             <marker id="arrow" markerWidth="8" markerHeight="6" 
