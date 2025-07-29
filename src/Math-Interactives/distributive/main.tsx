@@ -37,7 +37,9 @@ const Distributive: React.FC<Props> = ({current_step}) => {
 
     const render_step_2 = () => (
         <div className="p-8 text-center">
-            <h2 className="text-2xl mb-4">Distribute the {a}:</h2>
+            <div className="title-box mb-12 p-4 bg-gray-100 rounded">
+                <h2 className="text-2xl">Distribute the {a}:</h2>
+            </div>
             
             {/* Simple container with curves on top */}
             <div className="relative">
