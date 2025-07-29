@@ -74,11 +74,9 @@ const Distributive: React.FC<Props> = ({current_step}) => {
                 
                 {/* Distributed equation with draggable yellow */}
                 <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2">
-                    {(leftBlankFilled || rightBlankFilled) ? (
-                        <DraggableNumber number={a} className={yellow} onDragEnd={handleDragEnd} />
-                    ) : (
-                        <DraggableNumber number={a} className={yellow} onDragEnd={handleDragEnd} />
-                    )}
+                {(!leftBlankFilled || !rightBlankFilled) && (
+                    <DraggableNumber number={a} className={yellow} onDragEnd={handleDragEnd} />
+                )}
                     <span>(</span>
                     
                     <div id="left-blank" className="px-3 py-2 rounded border-2 border-dashed border-yellow-400 bg-yellow-100 text-2xl sm:text-4xl font-bold text-gray-400 cursor-pointer select-none">
