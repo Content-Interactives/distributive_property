@@ -18,11 +18,11 @@ function App() {
   const project_title = "Distributive Property"; // MODIFY THIS FOR YOUR PROJECT
   
   const flexi_steps = [
-    { pose: Flexi.confident, message: "[TEXT1]" },
-    { pose: Flexi.teacher, message: "[TEXT2]" },
-    { pose: Flexi.thumbs_up, message: "[TEXT3]" },
-    { pose: Flexi.pointing, message: "[TEXT4]" },
-    { pose: Flexi.pointing, message: "I have an extra slide" }
+    { pose: Flexi.wave, message: "Let's simplify using the distributive property!" },
+    { pose: Flexi.pointing, message: "Distribute the a. Drag it to each of the numbers inside." },
+    { pose: Flexi.thumbs_up, message: "Great! now we can multiply the numbers." },
+    { pose: Flexi.present, message: "Add the numbers together." },
+    { pose: Flexi.stars, message: "We did it!" }
   ];
 
   // ==========================================
