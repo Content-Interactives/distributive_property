@@ -29,17 +29,15 @@ function Template({ title, current_step, total_steps, flexi_steps, on_next, on_p
           on_next={on_next}
           on_prev={on_prev}
         />
-        {/* Mobile Flexi - fixed positioning for Safari bar */}
-        <div className="md:hidden fixed bottom-4 left-4 flex items-center gap-2 z-40">
-          <img 
-            src={flexi} 
-            alt="Flexi" 
-            className="w-20 h-20 flex-shrink-0"
-          />
-          <div className="flex flex-col justify-center h-20">
-            <div className="bg-white rounded-lg p-2 shadow-lg text-xs border border-gray-200 max-w-[140px] leading-tight max-h-32 overflow-y-auto break-words hyphens-none">
-              {flexi_message}
-            </div>
+        {/* Flexi - independent positioning */}
+        <div className="md:hidden fixed bottom-4 left-4 z-40">
+          <img src={flexi} className="w-20 h-20" />
+        </div>
+
+        {/* Speech bubble - independent positioning */}
+        <div className="md:hidden fixed bottom-20 left-28 z-40">
+          <div className="bg-white rounded-lg p-2 shadow-lg text-xs border border-gray-200 max-w-[140px] leading-tight max-h-32 overflow-y-auto break-words hyphens-none">
+            {flexi_message}
           </div>
         </div>
 
