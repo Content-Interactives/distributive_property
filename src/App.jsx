@@ -14,13 +14,13 @@ function App() {
   // 🟢 MODIFY THE SECTION BELOW THIS LINE
   // ==========================================
   
-  const total_steps = 4; // Change me, How many Steps do you want?
+  const total_steps = 5; // Change me, How many Steps do you want?
   const project_title = "Distributive Property"; // MODIFY THIS FOR YOUR PROJECT
   
   const flexi_steps = [
     { pose: Flexi.wave, message: "Let's simplify using the distributive property!" },
-    { pose: Flexi.pointing, message: "Distribute the a. Drag it to each of the numbers inside." },
-    { pose: Flexi.thumbs_up, message: "Great! now we can multiply the numbers." },
+    { pose: Flexi.pointing, message: "Distribute the outside number. Drag it to each of the numbers inside." },
+    { pose: Flexi.thumbs_up, message: "Great! Now we can multiply the numbers." },
     { pose: Flexi.present, message: "Add the numbers together." },
     { pose: Flexi.stars, message: "We did it!" }
   ];

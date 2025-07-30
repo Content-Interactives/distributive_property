@@ -207,30 +207,10 @@ const Distributive: React.FC<Props> = ({current_step}) => {
         }, []);
 
         return (
-            <div className="space-y-6">
-                {/* Show the results from multiplication */}
-                <div className="text-4xl font-bold flex items-center justify-center gap-2">
-                    <span className="px-3 py-2 rounded text-black">{a*b}</span>
-                    <span className="mx-2">+</span>
-                    <span className="px-3 py-2 rounded text-black">{a*c}</span>
-                </div>
-
-                {/* Equals sign */}
-                <motion.div 
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="text-5xl text-center text-blue-600"
-                >
-                    =
-                </motion.div>
-
-                {/* Final green result */}
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-4xl font-bold text-center"
-                >
+            <div className="p-8 text-center">
+                <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2 flex-nowrap">
                     <motion.span
+                        layout
                         animate={showFinal ? { 
                             backgroundColor: "#bbf7d0",
                             border: "4px solid #22c55e",
@@ -238,10 +218,19 @@ const Distributive: React.FC<Props> = ({current_step}) => {
                             borderRadius: "0.5rem"
                         } : {}}
                         transition={{ duration: 0.8 }}
+                        className="flex items-center gap-2"
                     >
-                        <span className="text-black">{a*b + a*c}</span>
+                        {showFinal ? (
+                            <span className="text-black">{a*b + a*c}</span>
+                        ) : (
+                            <>
+                                <span className="text-black">{a*b}</span>
+                                <span>+</span>
+                                <span className="text-black">{a*c}</span>
+                            </>
+                        )}
                     </motion.span>
-                </motion.div>
+                </div>
             </div>
         );
     };
