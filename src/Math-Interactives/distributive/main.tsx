@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { generateRandomExpression, getStyles } from './utils';
 import { DraggableNumber } from './drag';
 import { SimplifyAnimation } from './simplify';
+import { motion } from 'framer-motion';
 
 interface Props {
     current_step: number;
@@ -134,12 +135,132 @@ const Distributive: React.FC<Props> = ({current_step}) => {
         </div>
     );
 
+    // Add this to main.tsx or create a separate file
+    const MultiplicationStep = ({ a, b, c }: { a: number, b: number, c: number }) => {
+        const [subStep, setSubStep] = useState(0);
+
+        useEffect(() => {
+            const timer = setInterval(() => {
+                if (subStep < 2) {
+                    setSubStep(prev => prev + 1);
+                }
+            }, 1500);
+            return () => clearInterval(timer);
+        }, [subStep]);
+
+        return (
+            <div className="p-8 text-center">
+                <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2 flex-nowrap">
+                    <motion.span
+                        layout
+                        animate={subStep >= 1 ? { 
+                            padding: "0.5rem 0.75rem",
+                            borderRadius: "0.5rem"
+                        } : {}}
+                        transition={{ duration: 0.8 }}
+                        className="flex items-center gap-1"
+                    >
+                        {subStep >= 1 ? (
+                            <span className="text-black">{a*b}</span>
+                        ) : (
+                            <>
+                                <span className={yellow}>{a}</span>
+                                <span>×</span>
+                                <span className={blue}>{b}</span>
+                            </>
+                        )}
+                    </motion.span>
+                    <span className="mx-2">+</span>
+                    <motion.span
+                        layout
+                        animate={subStep >= 2 ? { 
+                            padding: "0.5rem 0.75rem",
+                            borderRadius: "0.5rem"
+                        } : {}}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="flex items-center gap-1"
+                    >
+                        {subStep >= 2 ? (
+                            <span className="text-black">{a*c}</span>
+                        ) : (
+                            <>
+                                <span className={yellow}>{a}</span>
+                                <span>×</span>
+                                <span className={green}>{c}</span>
+                            </>
+                        )}
+                    </motion.span>
+                </div>
+            </div>
+        );
+    };
+
+    // Add this to main.tsx or create a separate file  
+    const AdditionStep = ({ a, b, c }: { a: number, b: number, c: number }) => {
+        const [showFinal, setShowFinal] = useState(false);
+
+        useEffect(() => {
+            const timer = setTimeout(() => {
+                setShowFinal(true);
+            }, 1500);
+            return () => clearTimeout(timer);
+        }, []);
+
+        return (
+            <div className="space-y-6">
+                {/* Show the results from multiplication */}
+                <div className="text-4xl font-bold flex items-center justify-center gap-2">
+                    <span className="px-3 py-2 rounded text-black">{a*b}</span>
+                    <span className="mx-2">+</span>
+                    <span className="px-3 py-2 rounded text-black">{a*c}</span>
+                </div>
+
+                {/* Equals sign */}
+                <motion.div 
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="text-5xl text-center text-blue-600"
+                >
+                    =
+                </motion.div>
+
+                {/* Final green result */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-4xl font-bold text-center"
+                >
+                    <motion.span
+                        animate={showFinal ? { 
+                            backgroundColor: "#bbf7d0",
+                            border: "4px solid #22c55e",
+                            padding: "0.75rem 1rem",
+                            borderRadius: "0.5rem"
+                        } : {}}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <span className="text-black">{a*b + a*c}</span>
+                    </motion.span>
+                </motion.div>
+            </div>
+        );
+    };
+
     // Clean switch
     switch(current_step) {
         case 1: return render_step_1();
         case 2: return render_step_2();
-        case 3: return render_step_3();
-        case 4: return render_step_4();
+        case 3: return (
+            <div className="p-8 text-center">
+                <MultiplicationStep a={a} b={b} c={c} />
+            </div>
+        );
+        case 4: return (
+            <div className="p-8 text-center">
+                <AdditionStep a={a} b={b} c={c} />
+            </div>
+        );
+        case 5: return render_step_4(); // Move the "Great job!" to step 5
         default: return <div>Invalid step</div>;
     }
 }
