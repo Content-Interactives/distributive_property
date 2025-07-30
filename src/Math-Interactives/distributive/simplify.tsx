@@ -41,7 +41,6 @@ export const SimplifyAnimation = ({ a, b, c }: { a: number, b: number, c: number
                     <motion.span
                         layout
                         animate={subStep >= 1 ? { 
-                            backgroundColor: "#fed7aa",
                             padding: "0.5rem 0.75rem",
                             borderRadius: "0.5rem"
                         } : {}}
@@ -57,7 +56,6 @@ export const SimplifyAnimation = ({ a, b, c }: { a: number, b: number, c: number
                     <motion.span
                         layout
                         animate={subStep >= 2 ? { 
-                            backgroundColor: "#fed7aa",
                             padding: "0.5rem 0.75rem",
                             borderRadius: "0.5rem"
                         } : {}}
@@ -104,7 +102,7 @@ export const SimplifyAnimation = ({ a, b, c }: { a: number, b: number, c: number
                         {layer3Step >= 1 ? (
                             <span className="text-black">{a*b + a*c}</span>
                         ) : (
-                            <><span className="bg-orange-200 px-3 py-2 rounded text-black">{a*b}</span> + <span className="bg-orange-200 px-3 py-2 rounded text-black">{a*c}</span></>
+                            <><span className="px-3 py-2 rounded text-black">{a*b}</span> + <span className="px-3 py-2 rounded text-black">{a*c}</span></>
                         )}
                     </motion.span>
                 </motion.div>

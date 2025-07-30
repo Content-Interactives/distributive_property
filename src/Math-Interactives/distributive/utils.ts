@@ -18,8 +18,8 @@ export const getStyles = () => {
     );
 
     const yellow = cn(base, "bg-yellow-200 hover:bg-yellow-300");
-    const blue = cn(base, "bg-blue-200 hover:bg-blue-300");
-    const green = cn(base, "bg-green-200 hover:bg-green-300");
+    const blue = cn(base);
+    const green = cn(base);
     const title = cn("text-2xl mb-4");
 
     const arrow = {
