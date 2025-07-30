@@ -78,7 +78,11 @@ const Distributive: React.FC<Props> = ({current_step}) => {
                     <span>(</span>
                     
                     <div id="left-blank" className="relative cursor-pointer">
-                        <div className="px-3 py-2 rounded border-2 border-dashed border-yellow-400 bg-yellow-100 text-2xl font-bold text-gray-400 select-none">
+                        <div className={`px-3 py-2 rounded border-2 text-2xl font-bold select-none ${
+                            leftBlankFilled 
+                                ? 'border-solid border-yellow-600 bg-yellow-200 text-black' 
+                                : 'border-dashed border-yellow-400 bg-yellow-100 text-gray-400'
+                        }`}>
                             {leftBlankFilled ? a : '?'}
                         </div>
                         <div className="absolute inset-0 w-24 h-24 -translate-x-6 -translate-y-6"></div>
@@ -89,7 +93,11 @@ const Distributive: React.FC<Props> = ({current_step}) => {
                     <span className="mx-2">+</span>
                     
                     <div id="right-blank" className="relative cursor-pointer">
-                        <div className="px-3 py-2 rounded border-2 border-dashed border-yellow-400 bg-yellow-100 text-2xl font-bold text-gray-400 select-none">
+                        <div className={`px-3 py-2 rounded border-2 text-2xl font-bold select-none ${
+                            rightBlankFilled 
+                                ? 'border-solid border-yellow-600 bg-yellow-200 text-black' 
+                                : 'border-dashed border-yellow-400 bg-yellow-100 text-gray-400'
+                        }`}>
                             {rightBlankFilled ? a : '?'}
                         </div>
                         <div className="absolute inset-0 w-24 h-24 -translate-x-6 -translate-y-6"></div>
