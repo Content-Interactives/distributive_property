@@ -3,9 +3,9 @@ import { cn } from '../../utils/cn';
 
 // Random expression generator
 export const generateRandomExpression = () => {
-    const a = Math.floor(Math.random() * 9) + 1;
-    const b = 10;
-    const c = Math.floor(Math.random() * 9) + 1;
+    const a = Math.floor(Math.random() * 8) + 2;
+    const b = Math.floor(Math.random() * 8) + 2;
+    const c = Math.floor(Math.random() * 8) + 2;
     return { a, b, c };
 };
 
