@@ -12,12 +12,13 @@ export const generateRandomExpression = () => {
 // Style utilities
 export const getStyles = () => {
     const base = cn(
-        "px-3 py-2 rounded",
+        "px-3 py-2 rounded", 
         "text-2xl sm:text-4xl font-bold", 
         "cursor-pointer select-none touch-manipulation"
     );
 
     const yellow = cn(base, "bg-yellow-200 hover:bg-yellow-300");
+    const neutral = cn(base);
     const blue = cn(base);
     const green = cn(base);
     const title = cn("text-2xl mb-4");
@@ -29,7 +30,7 @@ export const getStyles = () => {
         markerEnd: "url(#arrow)"
     };
 
-    return { yellow, blue, green, title, arrow };
+    return { yellow, blue, green, neutral, title, arrow };
 };
 
 // Distance calculation functions

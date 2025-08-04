@@ -9,7 +9,7 @@ interface Props {
 }
 
 // ✅ Static styles outside
-const { yellow, blue, green, title, arrow } = getStyles();
+const { yellow, blue, green, neutral, title, arrow } = getStyles();
 
 const Distributive: React.FC<Props> = ({current_step}) => {
     const [expression] = useState(generateRandomExpression);
@@ -42,7 +42,7 @@ const Distributive: React.FC<Props> = ({current_step}) => {
         <div className="p-8 text-center">
 
             <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2">
-                <span ref={yellowRef} className={yellow}>{a}</span>
+                <span ref={yellowRef} className={neutral}>{a}</span>
                 <span>(</span>
                 <span ref={blueRef} className={blue}>{b}</span>
                 <span>+</span>
@@ -164,9 +164,9 @@ const Distributive: React.FC<Props> = ({current_step}) => {
                             <span className="text-black">{a*b}</span>
                         ) : (
                             <>
-                                <span className={yellow}>{a}</span>
+                                <span className={neutral}>{a}</span>
                                 <span>×</span>
-                                <span className={blue}>{b}</span>
+                                <span className={neutral}>{b}</span>
                             </>
                         )}
                     </motion.span>
@@ -184,7 +184,7 @@ const Distributive: React.FC<Props> = ({current_step}) => {
                             <span className="text-black">{a*c}</span>
                         ) : (
                             <>
-                                <span className={yellow}>{a}</span>
+                                <span className={neutral}>{a}</span>
                                 <span>×</span>
                                 <span className={green}>{c}</span>
                             </>
