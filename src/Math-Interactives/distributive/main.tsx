@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { generateRandomExpression, getStyles } from './utils';
 import { DraggableNumber } from './drag';
-import { SimplifyAnimation } from './simplify';
 import { motion } from 'framer-motion';
 
 interface Props {
@@ -109,12 +108,6 @@ const Distributive: React.FC<Props> = ({current_step}) => {
                     <span>)</span>
                 </div>
             </div>
-        </div>
-    );
-
-    const render_step_3 = () => (
-        <div className="p-8 text-center">
-            <SimplifyAnimation a={a} b={b} c={c} />
         </div>
     );
 

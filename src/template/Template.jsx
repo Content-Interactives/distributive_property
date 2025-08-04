@@ -28,6 +28,8 @@ function Template({ title, current_step, total_steps, flexi_steps, on_next, on_p
           total_steps={total_steps}
           on_next={on_next}
           on_prev={on_prev}
+          leftEnabled={true}
+          rightEnabled={true}
         />
         {/* Flexi - independent positioning */}
         <div className="md:hidden fixed bottom-4 left-4 z-40">
