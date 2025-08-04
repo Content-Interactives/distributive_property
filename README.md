@@ -18,7 +18,7 @@ Try it here:
 This interactive is currently featured in the following CK-12 resources:
 
 - 📘 **CK-12 Intent Response**  
-  - 👉 MASTER: *(Add CK-12 link when available)*
+  - 👉 MASTER: [https://test.ck12.co/1b8UpP](https://test.ck12.co/1b8UpP)
 
 - 🧮 **CK-12 Math Lessons**  
   - Used in lessons covering expression simplification and properties of operations.  
