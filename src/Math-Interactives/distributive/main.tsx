@@ -12,24 +12,22 @@ interface Props {
 const { yellow, blue, green, neutral, title, arrow } = getStyles();
 
 // Move animation components outside to prevent recreation on re-renders
-const MultiplicationStep = ({ a, b, c, markStepComplete }: { a: number, b: number, c: number, markStepComplete?: (step: number) => void }) => {
+const MultiplicationStep = ({ a, b, c }: { a: number, b: number, c: number }) => {
     const [subStep, setSubStep] = useState(0);
 
     useEffect(() => {
         const timer = setInterval(() => {
-            if (subStep < 2) {
-                setSubStep(prev => prev + 1);
-            }
+            setSubStep(prev => {
+                if (prev < 2) {
+                    return prev + 1;
+                } else {
+                    clearInterval(timer);
+                    return prev;
+                }
+            });
         }, 1500);
         return () => clearInterval(timer);
-    }, [subStep]);
-
-    // Separate effect to mark step complete when animation is done
-    useEffect(() => {
-        if (subStep === 2 && markStepComplete) {
-            markStepComplete(4);
-        }
-    }, [subStep, markStepComplete]);
+    }, []);
 
     return (
         <div className="p-8 text-center">
@@ -60,7 +58,7 @@ const MultiplicationStep = ({ a, b, c, markStepComplete }: { a: number, b: numbe
                         padding: "0.5rem 0.75rem",
                         borderRadius: "0.5rem"
                     } : {}}
-                    transition={{ duration: 0.8, delay: 0.2 }}
+                    transition={{ duration: 0.8 }}
                     className="flex items-center gap-1"
                 >
                     {subStep >= 2 ? (
@@ -78,7 +76,7 @@ const MultiplicationStep = ({ a, b, c, markStepComplete }: { a: number, b: numbe
     );
 };
 
-const AdditionStep = ({ a, b, c, markStepComplete }: { a: number, b: number, c: number, markStepComplete?: (step: number) => void }) => {
+const AdditionStep = ({ a, b, c }: { a: number, b: number, c: number }) => {
     const [showFinal, setShowFinal] = useState(false);
 
     useEffect(() => {
@@ -87,13 +85,6 @@ const AdditionStep = ({ a, b, c, markStepComplete }: { a: number, b: number, c: 
         }, 1500);
         return () => clearTimeout(timer);
     }, []);
-
-    // Separate effect to mark step complete when animation is done
-    useEffect(() => {
-        if (showFinal && markStepComplete) {
-            markStepComplete(5);
-        }
-    }, [showFinal, markStepComplete]);
 
     return (
         <div className="p-8 text-center">
@@ -151,6 +142,25 @@ const Distributive: React.FC<Props> = ({current_step, markStepComplete}) => {
             markStepComplete(3); // Allow progression to step 3
         }
     }, [leftBlankFilled, rightBlankFilled, markStepComplete]);
+
+    // Mark animation steps as complete after a delay (simple timer approach)
+    useEffect(() => {
+        if (current_step === 3 && markStepComplete) {
+            const timer = setTimeout(() => {
+                markStepComplete(4); // Allow progression to step 4 after animation time
+            }, 3000); // 3 seconds for multiplication animation
+            return () => clearTimeout(timer);
+        }
+    }, [current_step, markStepComplete]);
+
+    useEffect(() => {
+        if (current_step === 4 && markStepComplete) {
+            const timer = setTimeout(() => {
+                markStepComplete(5); // Allow progression to step 5 after animation time
+            }, 2000); // 2 seconds for addition animation
+            return () => clearTimeout(timer);
+        }
+    }, [current_step, markStepComplete]);
 
     const handleDragEnd = (event: any, info: any) => {
         const leftBox = document.getElementById('left-blank')?.getBoundingClientRect();
@@ -261,8 +271,8 @@ const Distributive: React.FC<Props> = ({current_step, markStepComplete}) => {
     switch(current_step) {
         case 1: return render_step_1();
         case 2: return render_step_2();
-        case 3: return <MultiplicationStep a={a} b={b} c={c} markStepComplete={markStepComplete} />;
-        case 4: return <AdditionStep a={a} b={b} c={c} markStepComplete={markStepComplete} />;
+        case 3: return <MultiplicationStep a={a} b={b} c={c} />;
+        case 4: return <AdditionStep a={a} b={b} c={c} />;
         case 5: return render_step_4(); // Move the "Great job!" to step 5
         default: return <div>Invalid step</div>;
     }
