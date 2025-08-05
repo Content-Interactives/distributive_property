@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Template from './template/Template.jsx';
 import Flexi from './template/assets/Flexi.js';
 import Distributive from './Math-Interactives/distributive/main.tsx';
+import { useButtonStates } from './hooks/useButtonStates.ts';
 
 function App() {
   const [current_step, set_current_step] = useState(1);
@@ -25,6 +26,9 @@ function App() {
     { pose: Flexi.stars, message: "We did it!" }
   ];
 
+  // Button state management
+  const { leftEnabled, rightEnabled, markStepComplete } = useButtonStates(current_step, total_steps);
+
   // ==========================================
   // 🟢 MODIFY THE SECTION ABOVE THIS LINE
   // ==========================================
@@ -41,12 +45,17 @@ function App() {
       flexi_steps={flexi_steps}
       on_next={() => set_current_step(prev => prev + 1)}
       on_prev={() => set_current_step(prev => prev - 1)}
+      leftEnabled={leftEnabled}
+      rightEnabled={rightEnabled}
     >
       
       {/* ================================================= */}
       {/* 🟢 HEY CURSUR! VIBE CODE INSIDE THIS AREA BELOW! */}
       {/* ================================================= */}
-      <Distributive current_step={current_step}></Distributive>
+      <Distributive 
+        current_step={current_step}
+        markStepComplete={markStepComplete}
+      />
       
       {/* Your interactive content goes here! */}
       
@@ -56,6 +65,7 @@ function App() {
 
     </Template>
   );
+
 }
 
 // ==========================================

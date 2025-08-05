@@ -5,12 +5,126 @@ import { motion } from 'framer-motion';
 
 interface Props {
     current_step: number;
+    markStepComplete?: (step: number) => void;
 }
 
 // ✅ Static styles outside
 const { yellow, blue, green, neutral, title, arrow } = getStyles();
 
-const Distributive: React.FC<Props> = ({current_step}) => {
+// Move animation components outside to prevent recreation on re-renders
+const MultiplicationStep = ({ a, b, c, markStepComplete }: { a: number, b: number, c: number, markStepComplete?: (step: number) => void }) => {
+    const [subStep, setSubStep] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            if (subStep < 2) {
+                setSubStep(prev => prev + 1);
+            }
+        }, 1500);
+        return () => clearInterval(timer);
+    }, [subStep]);
+
+    // Separate effect to mark step complete when animation is done
+    useEffect(() => {
+        if (subStep === 2 && markStepComplete) {
+            markStepComplete(4);
+        }
+    }, [subStep, markStepComplete]);
+
+    return (
+        <div className="p-8 text-center">
+            <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2 flex-nowrap">
+                <motion.span
+                    layout
+                    animate={subStep >= 1 ? { 
+                        padding: "0.5rem 0.75rem",
+                        borderRadius: "0.5rem"
+                    } : {}}
+                    transition={{ duration: 0.8 }}
+                    className="flex items-center gap-1"
+                >
+                    {subStep >= 1 ? (
+                        <span className="text-black">{a*b}</span>
+                    ) : (
+                        <>
+                            <span className={neutral}>{a}</span>
+                            <span>×</span>
+                            <span className={neutral}>{b}</span>
+                        </>
+                    )}
+                </motion.span>
+                <span className="mx-2">+</span>
+                <motion.span
+                    layout
+                    animate={subStep >= 2 ? { 
+                        padding: "0.5rem 0.75rem",
+                        borderRadius: "0.5rem"
+                    } : {}}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="flex items-center gap-1"
+                >
+                    {subStep >= 2 ? (
+                        <span className="text-black">{a*c}</span>
+                    ) : (
+                        <>
+                            <span className={neutral}>{a}</span>
+                            <span>×</span>
+                            <span className={green}>{c}</span>
+                        </>
+                    )}
+                </motion.span>
+            </div>
+        </div>
+    );
+};
+
+const AdditionStep = ({ a, b, c, markStepComplete }: { a: number, b: number, c: number, markStepComplete?: (step: number) => void }) => {
+    const [showFinal, setShowFinal] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowFinal(true);
+        }, 1500);
+        return () => clearTimeout(timer);
+    }, []);
+
+    // Separate effect to mark step complete when animation is done
+    useEffect(() => {
+        if (showFinal && markStepComplete) {
+            markStepComplete(5);
+        }
+    }, [showFinal, markStepComplete]);
+
+    return (
+        <div className="p-8 text-center">
+            <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2 flex-nowrap">
+                <motion.span
+                    layout
+                    animate={showFinal ? { 
+                        backgroundColor: "#bbf7d0",
+                        border: "4px solid #22c55e",
+                        padding: "0.75rem 1rem",
+                        borderRadius: "0.5rem"
+                    } : {}}
+                    transition={{ duration: 0.8 }}
+                    className="flex items-center gap-2"
+                >
+                    {showFinal ? (
+                        <span className="text-black">{a*b + a*c}</span>
+                    ) : (
+                        <>
+                            <span className="text-black">{a*b}</span>
+                            <span>+</span>
+                            <span className="text-black">{a*c}</span>
+                        </>
+                    )}
+                </motion.span>
+            </div>
+        </div>
+    );
+};
+
+const Distributive: React.FC<Props> = ({current_step, markStepComplete}) => {
     const [expression] = useState(generateRandomExpression);
     const { a, b, c } = expression;
 
@@ -30,6 +144,13 @@ const Distributive: React.FC<Props> = ({current_step}) => {
             setRightBlankFilled(false);
         }
     }, [current_step]);
+
+    // Mark step 2 complete when both blanks are filled
+    useEffect(() => {
+        if (leftBlankFilled && rightBlankFilled && markStepComplete) {
+            markStepComplete(3); // Allow progression to step 3
+        }
+    }, [leftBlankFilled, rightBlankFilled, markStepComplete]);
 
     const handleDragEnd = (event: any, info: any) => {
         const leftBox = document.getElementById('left-blank')?.getBoundingClientRect();
@@ -136,120 +257,12 @@ const Distributive: React.FC<Props> = ({current_step}) => {
         </div>
     );
 
-    // Add this to main.tsx or create a separate file
-    const MultiplicationStep = ({ a, b, c }: { a: number, b: number, c: number }) => {
-        const [subStep, setSubStep] = useState(0);
-
-        useEffect(() => {
-            const timer = setInterval(() => {
-                if (subStep < 2) {
-                    setSubStep(prev => prev + 1);
-                }
-            }, 1500);
-            return () => clearInterval(timer);
-        }, [subStep]);
-
-        return (
-            <div className="p-8 text-center">
-                <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2 flex-nowrap">
-                    <motion.span
-                        layout
-                        animate={subStep >= 1 ? { 
-                            padding: "0.5rem 0.75rem",
-                            borderRadius: "0.5rem"
-                        } : {}}
-                        transition={{ duration: 0.8 }}
-                        className="flex items-center gap-1"
-                    >
-                        {subStep >= 1 ? (
-                            <span className="text-black">{a*b}</span>
-                        ) : (
-                            <>
-                                <span className={neutral}>{a}</span>
-                                <span>×</span>
-                                <span className={neutral}>{b}</span>
-                            </>
-                        )}
-                    </motion.span>
-                    <span className="mx-2">+</span>
-                    <motion.span
-                        layout
-                        animate={subStep >= 2 ? { 
-                            padding: "0.5rem 0.75rem",
-                            borderRadius: "0.5rem"
-                        } : {}}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="flex items-center gap-1"
-                    >
-                        {subStep >= 2 ? (
-                            <span className="text-black">{a*c}</span>
-                        ) : (
-                            <>
-                                <span className={neutral}>{a}</span>
-                                <span>×</span>
-                                <span className={green}>{c}</span>
-                            </>
-                        )}
-                    </motion.span>
-                </div>
-            </div>
-        );
-    };
-
-    // Add this to main.tsx or create a separate file  
-    const AdditionStep = ({ a, b, c }: { a: number, b: number, c: number }) => {
-        const [showFinal, setShowFinal] = useState(false);
-
-        useEffect(() => {
-            const timer = setTimeout(() => {
-                setShowFinal(true);
-            }, 1500);
-            return () => clearTimeout(timer);
-        }, []);
-
-        return (
-            <div className="p-8 text-center">
-                <div className="text-4xl font-bold mb-8 flex items-center justify-center gap-2 flex-nowrap">
-                    <motion.span
-                        layout
-                        animate={showFinal ? { 
-                            backgroundColor: "#bbf7d0",
-                            border: "4px solid #22c55e",
-                            padding: "0.75rem 1rem",
-                            borderRadius: "0.5rem"
-                        } : {}}
-                        transition={{ duration: 0.8 }}
-                        className="flex items-center gap-2"
-                    >
-                        {showFinal ? (
-                            <span className="text-black">{a*b + a*c}</span>
-                        ) : (
-                            <>
-                                <span className="text-black">{a*b}</span>
-                                <span>+</span>
-                                <span className="text-black">{a*c}</span>
-                            </>
-                        )}
-                    </motion.span>
-                </div>
-            </div>
-        );
-    };
-
     // Clean switch
     switch(current_step) {
         case 1: return render_step_1();
         case 2: return render_step_2();
-        case 3: return (
-            <div className="p-8 text-center">
-                <MultiplicationStep a={a} b={b} c={c} />
-            </div>
-        );
-        case 4: return (
-            <div className="p-8 text-center">
-                <AdditionStep a={a} b={b} c={c} />
-            </div>
-        );
+        case 3: return <MultiplicationStep a={a} b={b} c={c} markStepComplete={markStepComplete} />;
+        case 4: return <AdditionStep a={a} b={b} c={c} markStepComplete={markStepComplete} />;
         case 5: return render_step_4(); // Move the "Great job!" to step 5
         default: return <div>Invalid step</div>;
     }

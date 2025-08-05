@@ -3,7 +3,7 @@ import { Title } from './Header';
 import Buttons from './Footer/buttons.jsx';
 import Flexi from './assets/Flexi.js';
 
-function Template({ title, current_step, total_steps, flexi_steps, on_next, on_prev, children }) {
+function Template({ title, current_step, total_steps, flexi_steps, on_next, on_prev, children, leftEnabled = true, rightEnabled = true }) {
   const [flexi, set_flexi] = useState(Flexi.confident);
   const [flexi_message, set_flexi_message] = useState("Ready to learn!");
 
@@ -28,8 +28,8 @@ function Template({ title, current_step, total_steps, flexi_steps, on_next, on_p
           total_steps={total_steps}
           on_next={on_next}
           on_prev={on_prev}
-          leftEnabled={true}
-          rightEnabled={true}
+          leftEnabled={leftEnabled}
+          rightEnabled={rightEnabled}
         />
         {/* Flexi - independent positioning */}
         <div className="md:hidden fixed bottom-4 left-4 z-40">
@@ -60,7 +60,7 @@ function Template({ title, current_step, total_steps, flexi_steps, on_next, on_p
           <div className="absolute bottom-6 right-6 flex gap-4">
             <button 
               onClick={on_prev}
-              disabled={current_step === 1}
+              disabled={current_step === 1 || !leftEnabled}
               className="w-14 h-14 bg-green-500 hover:bg-green-600 disabled:bg-gray-300 rounded-full flex items-center justify-center text-white font-bold text-xl transition-colors shadow-lg hover:shadow-xl"
             >
               ←
@@ -68,7 +68,7 @@ function Template({ title, current_step, total_steps, flexi_steps, on_next, on_p
             
             <button 
               onClick={on_next}
-              disabled={current_step === total_steps}
+              disabled={current_step === total_steps || !rightEnabled}
               className="w-14 h-14 bg-green-500 hover:bg-green-600 disabled:bg-gray-300 rounded-full flex items-center justify-center text-white font-bold text-xl transition-colors shadow-lg hover:shadow-xl"
             >
               →
