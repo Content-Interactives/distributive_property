@@ -22,6 +22,14 @@ const Distributive: React.FC<Props> = ({current_step}) => {
     // ✅ Drag functionality
     const [leftBlankFilled, setLeftBlankFilled] = useState(false);
     const [rightBlankFilled, setRightBlankFilled] = useState(false);
+    
+    // Reset drag state when returning to step 2
+    useEffect(() => {
+        if (current_step === 2) {
+            setLeftBlankFilled(false);
+            setRightBlankFilled(false);
+        }
+    }, [current_step]);
 
     const handleDragEnd = (event: any, info: any) => {
         const leftBox = document.getElementById('left-blank')?.getBoundingClientRect();
