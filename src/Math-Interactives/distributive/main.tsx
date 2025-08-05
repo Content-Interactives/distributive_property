@@ -116,7 +116,7 @@ const Distributive: React.FC<Props> = ({current_step}) => {
         <div className="p-8 text-center">
             <div className="mb-8">
                 <h2 className="text-2xl mb-4">Great job! 🎉</h2>
-                <p className="text-lg mb-6">You solved: {a}({b} + {c}) = {a * b + a * c}</p>
+                <p className="text-lg mb-6">We simplified: {a}({b} + {c}) = {a * b + a * c}</p>
             </div>
             
             <button 
